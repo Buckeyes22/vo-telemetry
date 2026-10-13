@@ -1,0 +1,56 @@
+# --- Secrets / credentials (never commit) ---
+.env
+.env.*
+!.env.example
+!*.env.example
+*.secret
+*secret*.yaml
+*secret*.yml
+**/secrets/**
+*telemetry-token*
+*.pem
+*.key
+
+# --- Liveness producer local state ---
+# The outbox can contain activity strings and final-message previews.
+.claude/telemetry/
+**/outbox/**
+*.outbox
+current_run.json
+
+# --- SQLite databases and WAL sidecars ---
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+*.db
+*.db-wal
+*.db-shm
+
+# --- Shim spool / capture files ---
+*.spool
+spool/
+*.log
+
+# --- Local runtime data (default database and watcher audit paths) ---
+data/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.venv-dashboard/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+dist/
+build/
+*.egg-info/
+
+# --- Editor / OS ---
+.idea/
+.vscode/
+*.swp
+.DS_Store
+*:Zone.Identifier
+*.zip

@@ -1,0 +1,2 @@
+# Runtime uses only the Python standard library.
+# Local test command: uv run --with pytest pytest src/liveness/tests -q

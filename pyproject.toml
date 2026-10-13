@@ -1,0 +1,31 @@
+[project]
+name = "vo-telemetry"
+version = "0.1.0"
+description = "Event-sourced liveness and telemetry for long-running AI agent runs"
+requires-python = ">=3.11"
+license = "MIT"
+
+[tool.pytest.ini_options]
+testpaths = [
+  "src/liveness/tests",
+  "src/cc-host/tests",
+  "src/watcher/tests",
+  "src/dashboards/tests",
+  "examples/tests",
+]
+pythonpath = ["src", "src/cc-host"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+extend-exclude = [".venv"]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]
+
+[tool.mypy]
+python_version = "3.11"
+mypy_path = "src:src/cc-host"
+explicit_package_bases = true
+ignore_missing_imports = true
+files = ["src/liveness", "src/watcher", "src/dashboards", "src/cc-host/cc_host", "src/cc-host/tests", "examples"]

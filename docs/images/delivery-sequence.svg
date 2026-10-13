@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="624" viewBox="0 0 1120 624" role="img" aria-label="From producer fact to replayable state">
+<title>From producer fact to replayable state</title><desc>Delivery acknowledgement and reducer progress are distinct observations.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#597087"/></marker></defs>
+<style>text{font-family:Arial,Helvetica,sans-serif}.h{font-size:27px;font-weight:700;fill:#142b44}.sub{font-size:16px;fill:#52677b}.label{font-size:18px;font-weight:700;fill:#173451}.body{font-size:15px;fill:#405c73}.cap{font-size:13px;letter-spacing:1px;font-weight:700;fill:#31706e}</style>
+<rect width="1120" height="624" rx="16" fill="#f5f8fb"/>
+<text x="36" y="48" class="h">From producer fact to replayable state</text>
+<text x="36" y="76" class="sub">Delivery acknowledgement and reducer progress are distinct observations.</text>
+<text x="60" y="122" class="label">Producer</text>
+<path d="M126,141 V548" stroke="#c3d1de" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="328" y="122" class="label">Outbox / forwarder</text>
+<path d="M394,141 V548" stroke="#c3d1de" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="600" y="122" class="label">HTTP ingest</text>
+<path d="M666,141 V548" stroke="#c3d1de" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="870" y="122" class="label">WAL / reducer</text>
+<path d="M936,141 V548" stroke="#c3d1de" stroke-width="2" stroke-dasharray="6 5"/>
+<path d="M126,184 L394,184" fill="none" stroke="#597087" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="134" y="172" class="body">1. Append local fact</text>
+<path d="M394,247 L666,247" fill="none" stroke="#597087" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="402" y="235" class="body">2. FIFO send + bearer token</text>
+<path d="M666,310 L936,310" fill="none" stroke="#597087" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="674" y="298" class="body">3. Validate → durable append</text>
+<path d="M936,373 L666,373" fill="none" stroke="#597087" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="674" y="361" class="body">4. New event or duplicate ack</text>
+<path d="M666,436 L394,436" fill="none" stroke="#597087" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="402" y="424" class="body">5. Mark sent; failure → retry</text>
+<rect x="766" y="463" width="320" height="84" rx="10" fill="#eaf5f2" stroke="#cedbe6"/>
+<text x="784" y="495" class="label">Reduce + checkpoint</text>
+<text x="784" y="523" class="body">Serve snapshots and metrics</text>
+<text x="36" y="587" class="sub">Lost acknowledgement → retransmit same event_id → dedupe. Local storage failure remains a real limit.</text></svg>

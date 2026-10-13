@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="642" viewBox="0 0 1120 642" role="img" aria-label="Two planes, one operational view">
+<title>Two planes, one operational view</title><desc>Implemented lifecycle path above; illustrative OTel trace path below.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#597087"/></marker></defs>
+<style>text{font-family:Arial,Helvetica,sans-serif}.h{font-size:27px;font-weight:700;fill:#142b44}.sub{font-size:16px;fill:#52677b}.label{font-size:18px;font-weight:700;fill:#173451}.body{font-size:15px;fill:#405c73}.cap{font-size:13px;letter-spacing:1px;font-weight:700;fill:#31706e}</style>
+<rect width="1120" height="642" rx="16" fill="#f5f8fb"/>
+<text x="36" y="48" class="h">Two planes, one operational view</text>
+<text x="36" y="76" class="sub">Implemented lifecycle path above; illustrative OTel trace path below.</text>
+<text x="36" y="115" class="cap">LIVENESS · FACTS AND STATE</text>
+<rect x="36" y="132" width="250" height="125" rx="10" fill="#ffffff" stroke="#cedbe6"/>
+<text x="54" y="164" class="label">Lifecycle producers</text>
+<text x="54" y="192" class="body">Hooks and supervised CLIs</text>
+<text x="54" y="214" class="body">Transcript reconciliation</text>
+<text x="54" y="236" class="body">run / lane / tool events</text>
+<rect x="326" y="132" width="290" height="125" rx="10" fill="#ffffff" stroke="#cedbe6"/>
+<text x="344" y="164" class="label">Durable local delivery</text>
+<text x="344" y="192" class="body">SQLite outbox → FIFO forwarder</text>
+<text x="344" y="214" class="body">Retry + priority shedding</text>
+<text x="344" y="236" class="body">Explicit loss records</text>
+<rect x="656" y="132" width="428" height="125" rx="10" fill="#ffffff" stroke="#cedbe6"/>
+<text x="674" y="164" class="label">Liveness backend</text>
+<text x="674" y="192" class="body">Bearer-authenticated schema validation</text>
+<text x="674" y="214" class="body">SQLite WAL → reducer + checkpoint</text>
+<text x="674" y="236" class="body">Deduplication, replay, terminal protection</text>
+<path d="M286,192 L326,192" fill="none" stroke="#597087" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M616,192 L656,192" fill="none" stroke="#597087" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="656" y="300" width="428" height="122" rx="10" fill="#eaf5f2" stroke="#cedbe6"/>
+<text x="674" y="332" class="label">Read-only consumers</text>
+<text x="674" y="360" class="body">Textual dashboard + governed watcher</text>
+<text x="674" y="382" class="body">Snapshots, event pages, /readyz, /metrics</text>
+<text x="674" y="404" class="body">Dry-run notification by default</text>
+<path d="M870,257 L870,300" fill="none" stroke="#597087" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="36" y="300" width="580" height="122" rx="10" fill="#edf2f9" stroke="#cedbe6"/>
+<text x="54" y="332" class="label">Correlation stays separate</text>
+<text x="54" y="360" class="body">Liveness: run_id / agent_id / tool_run_id</text>
+<text x="54" y="382" class="body">Distributed traces: TRACEPARENT / trace_id</text>
+<text x="54" y="404" class="body">A heartbeat is not proof of useful progress.</text>
+<text x="36" y="459" class="cap">OBSERVABILITY · REQUEST CORRELATION</text>
+<rect x="36" y="476" width="250" height="98" rx="10" fill="#ffffff" stroke="#cedbe6"/>
+<text x="54" y="508" class="label">CLI OTel context</text>
+<text x="54" y="536" class="body">Adapter exporter environment</text>
+<rect x="326" y="476" width="290" height="98" rx="10" fill="#ffffff" stroke="#cedbe6"/>
+<text x="344" y="508" class="label">Edge → gateway collector</text>
+<text x="344" y="536" class="body">Different sockets + queue dirs</text>
+<rect x="656" y="476" width="428" height="98" rx="10" fill="#ffffff" stroke="#cedbe6"/>
+<text x="674" y="508" class="label">Local debug trace export</text>
+<text x="674" y="536" class="body">Template collector config for local debugging</text>
+<path d="M286,523 L326,523" fill="none" stroke="#597087" stroke-width="2" marker-end="url(#arrow)"/>
+<path d="M616,523 L656,523" fill="none" stroke="#597087" stroke-width="2" marker-end="url(#arrow)"/>
+<text x="36" y="613" class="sub">Local single-node implementation.</text></svg>

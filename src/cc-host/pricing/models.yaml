@@ -1,0 +1,6 @@
+# Template only. Copy to ~/.claude/telemetry/pricing/models.yaml and add exact
+# CLI-emitted model strings after verifying the installed CLI output.
+pricing:
+  effective_date: 2026-05-31
+  currency: USD
+  models: {}

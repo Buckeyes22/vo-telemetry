@@ -1,0 +1,17 @@
+services:
+  liveness:
+    build:
+      context: ..
+      dockerfile: src/liveness/Dockerfile
+    ports:
+      - "127.0.0.1:8723:8723"
+    environment:
+      LIVENESS_BIND_HOST: 0.0.0.0
+      LIVENESS_BIND_PORT: "8723"
+      LIVENESS_DB_PATH: /data/events.db
+      LIVENESS_INGEST_TOKEN: ${LIVENESS_INGEST_TOKEN:?Generate a local ingest token first}
+      LIVENESS_STORE_FULL_FINAL_MESSAGE: "false"
+    volumes:
+      - liveness-data:/data
+volumes:
+  liveness-data: {}

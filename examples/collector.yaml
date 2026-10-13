@@ -1,0 +1,56 @@
+# Local otelcol-contrib template. Validate with your installed collector binary.
+# Requires writable queue directories. This example contains no backend credentials.
+extensions:
+  file_storage/edge:
+    directory: ./data/otel/edge-queue
+  file_storage/gateway:
+    directory: ./data/otel/gateway-queue
+receivers:
+  otlp/edge:
+    protocols:
+      grpc:
+        endpoint: 127.0.0.1:4317
+      http:
+        endpoint: 127.0.0.1:4318
+  otlp/gateway:
+    protocols:
+      grpc:
+        endpoint: 127.0.0.1:5317
+      http:
+        endpoint: 127.0.0.1:5318
+processors:
+  attributes/redact:
+    actions:
+      - {key: prompt, action: delete}
+      - {key: response, action: delete}
+      - {key: db.statement, action: delete}
+      - {key: gen_ai.prompt, action: delete}
+      - {key: gen_ai.completion, action: delete}
+  resource/identity:
+    attributes:
+      - {key: host.name, value: demo-host, action: upsert}
+      - {key: service.namespace, value: demo, action: upsert}
+      - {key: deployment.environment.name, value: local, action: upsert}
+  batch: {}
+exporters:
+  otlp/edge-to-gateway:
+    endpoint: 127.0.0.1:5317
+    tls:
+      insecure: true
+    sending_queue:
+      storage: file_storage/edge
+    retry_on_failure:
+      enabled: true
+  debug:
+    verbosity: basic
+service:
+  extensions: [file_storage/edge, file_storage/gateway]
+  pipelines:
+    traces/edge:
+      receivers: [otlp/edge]
+      processors: [attributes/redact, resource/identity, batch]
+      exporters: [otlp/edge-to-gateway]
+    traces/gateway:
+      receivers: [otlp/gateway]
+      processors: [attributes/redact, batch]
+      exporters: [debug]
